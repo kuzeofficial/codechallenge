@@ -1,8 +1,8 @@
 import express from 'express';
+import { getStudents, addStudent } from '../controller/stdent-controller.js';
+
 const route = express.Router();
 
-route.get('/', (request, response) => {
-    response.status(200).json('Hi this is a CodeChallenge of a Interview')
-})
-
+route.get('/',  getStudents);
+route.post('/add', addStudent);
 export default route;
