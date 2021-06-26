@@ -1,7 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import route from './route/route.js'
 
 const app = express();
+
+app.use('/students',  route);
 
 const PORT = "8000";
 const URL = 'mongodb://user:user@crud-codechallenge-shard-00-00.vazjq.mongodb.net:27017,crud-codechallenge-shard-00-01.vazjq.mongodb.net:27017,crud-codechallenge-shard-00-02.vazjq.mongodb.net:27017/CRUD-CodeChallenge?ssl=true&replicaSet=atlas-he3wzk-shard-0&authSource=admin&retryWrites=true&w=majority'
