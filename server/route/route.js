@@ -1,8 +1,12 @@
 import express from 'express';
-import { getStudents, addStudent } from '../controller/stdent-controller.js';
+import { getStudents, addStudent, getStudentById, editStudent, deleteStudent } from '../controller/stdent-controller.js';
 
-const route = express.Router();
+const router = express.Router();
 
-route.get('/',  getStudents);
-route.post('/add', addStudent);
-export default route;
+router.get('/', getStudents);
+router.post('/add', addStudent);
+router.get('/:id', getStudentById);
+router.put('/:id', editStudent);
+router.delete('/:id', deleteStudent);
+
+export default router;
