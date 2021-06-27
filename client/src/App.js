@@ -1,18 +1,15 @@
 import React from 'react';
 import Index from './Pages/Index'
-import AddStudent from "./Components/AddStudent"
+import EditStudent from "./Components/EditStudent"
+
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 export default  function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/">
-                    <Index />
-                </Route>
-                <Route path="/add">
-                    <AddStudent />
-                </Route>
+                <Route exact path="/" component={Index} />
+                <Route exact path="/edit/:id" component={EditStudent} />
             </Switch>
         </Router>
     )

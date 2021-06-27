@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { addStudent } from "../Services/api"
-import { useHistory } from 'react-router-dom'
+import  Index from '../Pages/Index'
+import ReactDOM  from 'react-dom'
 
 const initialValues = {
     first_name: '',
@@ -12,7 +13,6 @@ const initialValues = {
 const AddStudent = () =>  {
     const [ user, setUser ] = useState(initialValues);
     const { first_name, last_name, email, age, grade } = user;
-    const history = useHistory()
 
     const onValueChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value})
@@ -20,8 +20,9 @@ const AddStudent = () =>  {
     
     const addStudentDetails = async () => {
         await addStudent(user);
-        history.push('./all');
+        ReactDOM.render(<Index/>, document.getElementById('root'));
     }
+
     return (
         <div id="addStudentModal" class="modal fade">
             <div class="modal-dialog">
@@ -29,7 +30,7 @@ const AddStudent = () =>  {
                     <form>
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Student</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
@@ -63,7 +64,7 @@ const AddStudent = () =>  {
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
-                            <input type="button" class="btn btn-success" onClick={() => addStudentDetails()}value="Add" />
+                            <input type="button" class="btn btn-success"data-dismiss="modal"   onClick={() => addStudentDetails()}  value="Add" />
                         </div>
                     </form>
                 </div>
