@@ -21,12 +21,6 @@ export const TableStudents = () => {
         <table class="table table-striped table-hover">
 					<thead>
 						<tr>
-                            <th>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="selectAll" />
-									<label for="selectAll"></label>
-								</span>
-							</th>
                             <th>ID</th>
 							<th>First Name</th>
 							<th>Last Name</th>
@@ -39,12 +33,6 @@ export const TableStudents = () => {
                         {
                             students.map(student => (
                                 <tr>
-                                    <td>
-                                        <span class="custom-checkbox">
-                                            <input type="checkbox" id="checkbox1" name="options[]" value="1" />
-                                            <label for="checkbox1"></label>
-                                        </span>
-                                    </td>
                                     <td>{student._id}</td>
                                     <td>{student.first_name}</td>
                                     <td>{student.last_name}</td>
