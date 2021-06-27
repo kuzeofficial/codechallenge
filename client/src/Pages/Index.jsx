@@ -1,18 +1,17 @@
 import React from 'react'
-import { TableStudents } from '../Components/Table'
+import { TableStudents } from '../Components/TableStudents'
 import AddStudent from "../Components/AddStudent"
-import DeleteStudent from '../Components/DeleteStudent';
+import '../Styles/custom_styles.css'
 import Title  from '../Components/Title';
 
 const Index = () => {
     return (
-        <div class="container">
-            <div class="table-responsive">
-                <div class="table-wrapper">
+        <div className="container">
+            <div className="table-responsive">
+                <div className="table-wrapper">
                     <Title />
                     <TableStudents />
                     <AddStudent />
-                    <DeleteStudent />
                 </div>
             </div>
         </div>

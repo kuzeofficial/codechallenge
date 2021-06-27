@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { addStudent } from "../Services/api"
-import  Index from '../Pages/Index'
-import ReactDOM  from 'react-dom'
+import { useHistory } from 'react-router-dom'
 
 const initialValues = {
     first_name: '',
@@ -11,45 +10,46 @@ const initialValues = {
     grade:'',
 }
 const AddStudent = () =>  {
-    const [ user, setUser ] = useState(initialValues);
-    const { first_name, last_name, email, age, grade } = user;
+    const [ student, setStudent ] = useState(initialValues);
+    const { first_name, last_name, email, age, grade } = student;
+    const history = useHistory()
 
     const onValueChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value})
+        setStudent({ ...student, [e.target.name]: e.target.value})
     }
     
     const addStudentDetails = async () => {
-        await addStudent(user);
-        ReactDOM.render(<Index/>, document.getElementById('root'));
+        await addStudent(student);
+        history.push('/')
     }
 
     return (
-        <div id="addStudentModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
+        <div id="addStudentModal" className="modal fade">
+            <div className="modal-dialog">
+                <div className="modal-content">
                     <form>
-                        <div class="modal-header">						
-                            <h4 class="modal-title">Add Student</h4>
-                            <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <div className="modal-header">						
+                            <h4 className="modal-title">Add Student</h4>
+                            <button type="button" className="close"   data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <div class="modal-body">					
-                            <div class="form-group">
+                        <div className="modal-body">					
+                            <div className="form-group">
                                 <label>Fist Name</label>
-                                <input onChange={(e) => onValueChange(e)} type="text" class="form-control"  name='first_name'   value={first_name} required />
+                                <input onChange={(e) => onValueChange(e)} type="text" className="form-control"  name='first_name'   value={first_name} required />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>Last Name</label>
-                                <input onChange={(e) => onValueChange(e)} type="text" class="form-control" name='last_name'  value={last_name}  required />
+                                <input onChange={(e) => onValueChange(e)} type="text" className="form-control" name='last_name'  value={last_name}  required />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>Email</label>
-                                <input onChange={(e) => onValueChange(e)} type="email" class="form-control" name='email'  value={email} required />
+                                <input onChange={(e) => onValueChange(e)} type="email" className="form-control" name='email'  value={email} required />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>Age</label>
-                                <input onChange={(e) => onValueChange(e)} type="number" class="form-control" name='age' value={age} required />
+                                <input onChange={(e) => onValueChange(e)} type="number" className="form-control" name='age' value={age} required />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>
                                     Grade
                                     <select onChange={(e) => onValueChange(e)} name='grade'  value={grade} required >
@@ -62,9 +62,9 @@ const AddStudent = () =>  {
                                 </label>
                             </div>					
                         </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
-                            <input type="button" class="btn btn-success"data-dismiss="modal"   onClick={() => addStudentDetails()}  value="Add" />
+                        <div className="modal-footer">
+                            <input type="button" className="btn btn-default" data-dismiss="modal" value="Cancel" />
+                            <input type="button" className="btn btn-success"data-dismiss="modal"   onClick={() => addStudentDetails()}  value="Add" />
                         </div>
                     </form>
                 </div>

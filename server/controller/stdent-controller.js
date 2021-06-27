@@ -1,8 +1,9 @@
 import Student from '../models/student.js';
 
-
+// Get all students
 export const getStudents = async (request, response) => {
     try{
+        // finding something inside a model is time taking, so we need to add await
         const students = await Student.find();
         response.status(200).json(students);
     }catch( error ){
@@ -10,9 +11,11 @@ export const getStudents = async (request, response) => {
     }
 }
 
+// Save data of the student in database
 export const addStudent = async (request, response) => {
+    // retreive the info of student from frontend
     const student = request.body;
-    console.log("Student Added")
+    console.log("student Add")
 
     const newStudent = new Student(student);
     try{
@@ -23,6 +26,7 @@ export const addStudent = async (request, response) => {
     }
 }
 
+// Get a student by id
 export const getStudentById = async (request, response) => {
     try{
         const student = await Student.findById(request.params.id);
@@ -32,7 +36,7 @@ export const getStudentById = async (request, response) => {
     }
 }
 
-// Save data of edited user in the database
+// Save data of edited student in the database
 export const editStudent = async (request, response) => {
     let student = await Student.findById(request.params.id);
     student = request.body;
@@ -46,10 +50,12 @@ export const editStudent = async (request, response) => {
     }
 }
 
+// deleting data of student from the database
 export const deleteStudent = async (request, response) => {
     try{
         await Student.deleteOne({_id: request.params.id});
-        response.status(201).json("Student   deleted Successfully");
+        console.log(`Student Delete ${request.params.id}`)
+        response.status(201).json("Student deleted Successfully");
     } catch (error){
         response.status(409).json({ message: error.message});     
     }

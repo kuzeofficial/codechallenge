@@ -1,72 +1,78 @@
 import React, {useState, useEffect} from 'react'
-import { editStudent } from "../Services/api"
-import { getStudents } from "../Services/api"
-// import  Index from '../Pages/Index'
-// import ReactDOM  from 'react-dom'
+// Import  function for get and edit data with the API
+import { editStudent, getStudents } from "../Services/api"
+// Import a useHistory for save the browser historial and useParams for get [id] of the url
 import { useHistory, useParams } from 'react-router-dom'
 
+// Setting the intial values for any entries of the data
 const initialValues = {
     first_name: '',
     last_name: '',
     email: '',
     age: '',
-    grade:'1st',
+    grade:'',
 }
+
 const EditStudent = () =>  {
-    const [ user, setUser ] = useState(initialValues);
-    const { first_name, last_name, email, age, grade } = user;
+    // Set the initial state
+    const [ student, setStudent ] = useState(initialValues);
+    // Set each input to student
+    const { first_name, last_name, email, age, grade } = student;
+    // Get the id from useParams()
     const { id } = useParams();
-    console.log(id)
+    // Save the browser history
     const history = useHistory()
-
+    
+    // Use Effect Hook for change the value in live
     useEffect(() => {
-        loadStudentData()
-    })
-    
-    const loadStudentData = async () => {
-        const response = await getStudents(id)
-        setUser(response.data)
+        loadUserDetails();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    // Load the information for better preview of this at the time of editing
+    const loadUserDetails = async() => {
+        const response = await getStudents(id);
+        setStudent(response.data);
     }
-
-    const onValueChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value})
-    }
-    
+    // Apply the changes and send to the API
     const editStudentDetails = async () => {
-        await editStudent(id, user);
+        await editStudent(id, student);
         history.push('../')
     }
-
-    const GoBack = () => {
+    // Allows you to modify the values and sets them constantly
+    const onValueChange = (e) => {
+        setStudent({...student, [e.target.name]: e.target.value})
+    }
+    // Function for buttons of cancel and close
+    const goBack = (e) => {
         history.push('../')
     }
 
     return (
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div className="modal-dialog">
+            <div className="modal-content">
                 <form>
-                    <div class="modal-header">						
-                        <h4 class="modal-title">Edit Student</h4>
-                        <button type="button" class="close"   onClick={() => GoBack()} data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div className="modal-header">						
+                        <h4 className="modal-title">Edit Student</h4>
+                        <button type="button" className="close" onClick={() => {goBack()}} data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                    <div class="modal-body">					
-                        <div class="form-group">
+                    <div className="modal-body">					
+                        <div className="form-group">
                             <label>Fist Name</label>
-                            <input onChange={(e) => onValueChange(e)} type="text" class="form-control"  name='first_name'   value={first_name} required />
+                            <input onChange={(e) => onValueChange(e)} type="text" className="form-control"  name='first_name'  value={first_name} required />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label>Last Name</label>
-                            <input onChange={(e) => onValueChange(e)} type="text" class="form-control" name='last_name'  value={last_name}  required />
+                            <input onChange={(e) => onValueChange(e)} type="text" className="form-control" name='last_name'  value={last_name}  required />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label>Email</label>
-                            <input onChange={(e) => onValueChange(e)} type="email" class="form-control" name='email'  value={email} required />
+                            <input onChange={(e) => onValueChange(e)} type="email" className="form-control" name='email'  value={email} required />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label>Age</label>
-                            <input onChange={(e) => onValueChange(e)} type="number" class="form-control" name='age' value={age} required />
+                            <input onChange={(e) => onValueChange(e)} type="number" className="form-control" name='age' value={age} required />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label>
                                 Grade
                                 <select onChange={(e) => onValueChange(e)} name='grade'  value={grade} required >
@@ -79,9 +85,9 @@ const EditStudent = () =>  {
                             </label>
                         </div>					
                     </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" onClick={() => GoBack()} data-dismiss="modal" value="Cancel" />
-                        <input type="button" class="btn btn-success"data-dismiss="modal"   onClick={() => editStudentDetails()}  value="Update" />
+                    <div className="modal-footer">
+                        <input type="button" onClick={() => {goBack()}} className="btn btn-default" data-dismiss="modal" value="Cancel" />
+                        <input type="button" className="btn btn-success"data-dismiss="modal"   onClick={() => editStudentDetails()}  value="Update" />
                     </div>
                 </form>
             </div>

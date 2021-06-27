@@ -8,7 +8,7 @@ export default  function App() {
     return (
         <Router>
             <Switch>
-                <Route exact path="/" component={Index} />
+                <Route  exact path="/" component={Index} />
                 <Route exact path="/edit/:id" component={EditStudent} />
             </Switch>
         </Router>
