@@ -2,7 +2,7 @@
 
 Foobar is a Python library for dealing with word pluralization.
 
-## Installation
+## 👨‍💻 Installation
 
 Installation of client packages
 
@@ -16,7 +16,7 @@ cd server
 npm install package.json
 ```
 
-## Usage
+## ⚡ Usage
 
 This run the client app
 ```node
@@ -29,10 +29,10 @@ cd server/
 npm start
 ```
 
-## Contributing
+## 👯 Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## License
+## 📫 License
 [MIT](https://choosealicense.com/licenses/mit/)
